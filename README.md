@@ -1,0 +1,2 @@
+# SimpleSEO
+WordPress SEO plugin.
