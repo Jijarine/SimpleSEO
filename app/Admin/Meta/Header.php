@@ -34,12 +34,12 @@ class Header {
 
 		/**
 		 *
-		 * Remember always escape late, escape when you use the variable.
+		 * Remember always escape late, escape when you use a variable.
 		 *
 		 * esc_attr() within a attribute; src="esc_attr($value)"
 		 * esc_html() within for a variable; <p>esc_html($value)</p>
 		 * esc_url() within a href attribute; href="esc_url($value)"
-		 * esc_textarea() within a esc_textarea; <textarea>esc_url($value)</textarea>
+		 * esc_textarea() within a textarea; <textarea>esc_textarea($value)</textarea>
 		 *
 		 */
 
@@ -118,11 +118,14 @@ class Header {
 		}
 
 		$current_url = null;
+		$sseo_fb_image = null;
 		$sseo_fb_app_id = get_option('sseo_fb_app_id');
 		$sseo_fb_title = get_post_meta($post->ID, 'sseo_fb_title', true);
 		$sseo_fb_description = get_post_meta($post->ID, 'sseo_fb_description', true);
 		$sseo_fb_image_id = get_post_meta($post->ID, 'sseo_fb_image', true);
-		$sseo_fb_image = wp_get_attachment_image_url($sseo_fb_image_id, 'full');
+		if ($sseo_fb_image_id) {
+			$sseo_fb_image = wp_get_attachment_image_url($sseo_fb_image_id, 'full');
+		}
 
 		if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
 			if (is_shop()) {
@@ -152,13 +155,24 @@ class Header {
 		if ($current_url) { echo '<meta property="og:type" content="article" />'."\n"; }
 		if ($sseo_fb_title) { echo '<meta property="og:title" content="'.esc_attr($sseo_fb_title).'" />' . "\n"; }
 		if ($sseo_fb_description) { echo '<meta property="og:description" content="'.esc_attr($sseo_fb_description).'" />' . "\n"; }
-		if ($sseo_fb_image) { echo '<meta property="og:image" content="'.esc_attr($sseo_fb_image).'" />' . "\n"; }
+		
+		/* Default to the featured image sense we have no Facebook image. */
+		if (empty($sseo_fb_image)) {
+			$sseo_fb_image = wp_get_attachment_url(get_post_thumbnail_id());
+		}
+		
+		if (!empty($sseo_fb_image)) {
+			echo '<meta property="og:image" content="'.esc_url($sseo_fb_image).'" />' . "\n";
+		}
 
+		$sseo_tw_image = null;
 		$sseo_twitter_username = get_option('sseo_twitter_username');
 		$sseo_tw_title = get_post_meta($post->ID, 'sseo_tw_title', true);
 		$sseo_tw_description = get_post_meta($post->ID, 'sseo_tw_description', true);
 		$sseo_tw_image_id = get_post_meta($post->ID, 'sseo_tw_image', true);
-		$sseo_tw_image = wp_get_attachment_image_url($sseo_tw_image_id, 'full');
+		if (!empty($sseo_tw_image_id)) {
+			$sseo_tw_image = wp_get_attachment_image_url($sseo_tw_image_id, 'full');
+		}
 
 		if (empty($sseo_tw_title)) {
 			$sseo_tw_title = Title::getTitle();
@@ -171,8 +185,16 @@ class Header {
 
 		if ($sseo_tw_title) { echo '<meta name="twitter:title" content="'.esc_attr($sseo_tw_title).'" />' . "\n"; }
 		if ($sseo_tw_description) { echo '<meta name="twitter:description" content="'.esc_attr($sseo_tw_description).'" />' . "\n"; }
-		if ($sseo_tw_image) { echo '<meta name="twitter:image" content="'.esc_attr($sseo_tw_image).'" />' . "\n"; }
-		if ($sseo_twitter_username) { echo '<meta name="twitter:card" content="summary_large_image">' . "\n"; }
+		
+		/* Twitter image or featured image */
+		if (empty($sseo_tw_image) && has_post_thumbnail($post->ID)) {
+			$sseo_tw_image = wp_get_attachment_url(get_post_thumbnail_id());
+		}
+		
+		if (!empty($sseo_tw_image)) {
+			echo '<meta name="twitter:image" content="'.esc_url($sseo_tw_image).'" />' . "\n";
+			echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+		}
 
 		$sseo_baidu = esc_attr(get_option('sseo_baidu'));
 		if ($sseo_baidu) {

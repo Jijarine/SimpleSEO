@@ -216,7 +216,9 @@ class init {
 	 * @since  2.0.0
 	 */
 	public function renderHeader() {
-		new Meta\Header();
+		if (!is_admin()) {
+			new Meta\Header();
+		}
 	}
 
 	/**
@@ -225,7 +227,9 @@ class init {
 	 * @since  2.0.0
 	 */
 	public function renderAnalytics() {
-		new Meta\Analytics();
+		if (!is_admin()) {
+			new Meta\Analytics();
+		}
 	}
 	
 }

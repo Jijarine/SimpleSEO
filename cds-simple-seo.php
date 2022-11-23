@@ -4,7 +4,7 @@
 Plugin Name: Simple SEO
 Plugin URI: https://wordpress.org/plugins/cds-simple-seo/
 Description: A great plugin to modify the META information of your website, Google Analytics 4, Google Webmaster Tools, Yandex, Facebook, Twitter, and more! Please <a href="https://checkout.square.site/merchant/CGD6KJ0N7YECM/checkout/BN3726JNC6C6P6HL3JKNX3LC" target="_blank">Donate</a> if you find this plugin useful.
-Version: 2.0.0
+Version: 2.0.11
 Author: David Cole
 Author URI: http://coleds.com
 License: GPL2
@@ -32,7 +32,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define('SSEO_VERSION', '2.0.0');
+define('SSEO_VERSION', '2.0.11');
 define('SSEO_PATH', plugin_dir_path(__FILE__));
 
 require_once(dirname( __FILE__ ).'/autoloader.php');

@@ -28,8 +28,6 @@ class Enqueue {
  	 */
 	public function __construct() {
 		$this->version = SSEO_VERSION;
-		
-		wp_enqueue_media();
 
 		if (is_admin()) {
 			wp_enqueue_style(

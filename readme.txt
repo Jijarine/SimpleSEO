@@ -4,7 +4,7 @@ Donate link: https://checkout.square.site/merchant/CGD6KJ0N7YECM/checkout/BN3726
 Tags: SEO, meta, meta keywords, mera description, meta title, woocommerce seo, post, local seo, search engine, open graph, optimization, Google, google webmaster tools, analytic, analytics, analytics 4, readability, facebook, twitter, Bing, Yandex, custom post types, custom post type, custom posts, custom post, sitemap, import rank math, import all in one seo, import yoast, 
 Requires at least: 4.6.2
 Tested up to: 6.1
-Stable tag: 2.0.0
+Stable tag: 2.0.11
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Requires PHP: 5.5.6
@@ -13,7 +13,19 @@ Allows the modification of META titles, descriptions and keywords for all pages 
 
 == Description ==
 
-Description
+* Nonce Security!
+* Generates META tags automatically.
+* Works out-of-the-box. Just install!
+* You can override any title and set any META description and any META keywords you want!
+* Google Analytic 4!
+* Google Webmaster Tools!
+* Bing verification & Yandex verification!
+* Twitter and Facebook customization!
+* Quickedit SEO titles and descriptions!
+* Import Yoast SEO data!
+* Import Rank Math SEO data!
+* Import All In One SEO data!
+* Supports custom post types!
 
 == Installation ==
 
@@ -37,7 +49,20 @@ A: The default title and description will be used under settings. If the front p
 
 = 2.0.0 =
 
-* And so it begins... again...
-* Completly overhauled the code to namespace OOP
-* Added meta information to tags
-* Corected MANY bugs
+Release Date: November 22nd, 2022
+
+* Complete code rewrite to namespaces and OOP
+* Added SEO to tags
+
+= 2.0.11 =
+
+Release Date: November 23rd, 2022
+
+* Added options to use the posts featured image for FB and TW by default.
+* If FB or TW image is added, it will use that instead of the featured image.
+* Fixed a bug that was preventing the media loader from working in Elementor.
+* More translation options with the use of __() instead of just echoing. More coming.
+
+
+
+
